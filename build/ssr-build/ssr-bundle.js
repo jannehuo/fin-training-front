@@ -398,6 +398,7 @@ var GetWords = function GetWords() {
       return _ref2.apply(this, arguments);
     };
   }();
+  var iconClass = words.length > 0 ? 'ion-ios-refresh-outline' : 'ion-android-arrow-forward';
   return h("div", {
     className: "container"
   }, h("div", {
@@ -412,14 +413,14 @@ var GetWords = function GetWords() {
   }), h("button", {
     onClick: handleButtonClick
   }, h("i", {
-    className: "icon ion-android-arrow-forward"
+    className: "icon ".concat(iconClass)
   }))), h("div", {
     className: "words-list"
   }, words.map(function (word) {
     return h("div", {
       className: "word-row",
       key: word.word
-    }, word.word, " ", word.translation, h("button", {
+    }, h("span", null, word.word), h("span", null, word.translation), word.translation.length === 0 && h("button", {
       className: "word-check-button",
       onClick: function onClick() {
         return checkTranslation(word.word);

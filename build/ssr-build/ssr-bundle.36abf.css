@@ -99,11 +99,15 @@ a.demo {
 
 .words-list > .word-row {
   text-transform: capitalize;
-  padding: 20px 0;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-pack: justify;
       justify-content: space-between;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  min-height: 60px;
 }
 
 .word-check-button {
@@ -202,4 +206,4 @@ a.demo {
 }
 
 
-/*# sourceMappingURL=ssr-bundle.7b09f.css.map*/
+/*# sourceMappingURL=ssr-bundle.36abf.css.map*/
