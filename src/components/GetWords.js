@@ -14,37 +14,41 @@ const Words = () => {
   }
 
   const handleButtonClick = async () => {
-    const url = `${URL}/words/${amount}`
-    const response = await fetch(url)
-    const jsonData = await response.json()
-    const mappedData = jsonData.map((word) => {
-      return {
-        word,
-        translation: '',
-      }
-    })
-    setWords(mappedData)
+    if (amount.length > 0) {
+      const url = `${URL}/words/${amount}`
+      const response = await fetch(url)
+      const jsonData = await response.json()
+      const mappedData = jsonData.map((word) => {
+        return {
+          word,
+          translation: '',
+        }
+      })
+      setWords(mappedData)
+    }
   }
 
   const checkTranslation = async (word) => {
-    const url = `${URL}/translate/${word}`
-    const response = await fetch(url)
-    const jsonData = await response.json()
-    const updatedWordList = words.map((w) => {
-      if (w.word === word) {
-        return {
-          word: w.word,
-          translation: jsonData.result,
+    if (word.length > 0) {
+      const url = `${URL}/translate/${word}`
+      const response = await fetch(url)
+      const jsonData = await response.json()
+      const updatedWordList = words.map((w) => {
+        if (w.word === word) {
+          return {
+            word: w.word,
+            translation: jsonData.result,
+          }
         }
-      }
-      return {
-        ...w,
-      }
-    })
-    const updatedAmount = checked + 1
-    setChecked(updatedAmount)
-    window.localStorage.setItem('wordsAmount', updatedAmount.toString())
-    setWords(updatedWordList)
+        return {
+          ...w,
+        }
+      })
+      const updatedAmount = checked + 1
+      setChecked(updatedAmount)
+      window.localStorage.setItem('wordsAmount', updatedAmount.toString())
+      setWords(updatedWordList)
+    }
   }
 
   useEffect(() => {

@@ -369,16 +369,18 @@ var Words = function Words() {
   };
   var handleButtonClick = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator(function* () {
-      var url = "".concat(URL, "/words/").concat(amount);
-      var response = yield fetch(url);
-      var jsonData = yield response.json();
-      var mappedData = jsonData.map(function (word) {
-        return {
-          word: word,
-          translation: ''
-        };
-      });
-      setWords(mappedData);
+      if (amount.length > 0) {
+        var url = "".concat(URL, "/words/").concat(amount);
+        var response = yield fetch(url);
+        var jsonData = yield response.json();
+        var mappedData = jsonData.map(function (word) {
+          return {
+            word: word,
+            translation: ''
+          };
+        });
+        setWords(mappedData);
+      }
     });
     return function handleButtonClick() {
       return _ref.apply(this, arguments);
@@ -386,22 +388,24 @@ var Words = function Words() {
   }();
   var checkTranslation = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator(function* (word) {
-      var url = "".concat(URL, "/translate/").concat(word);
-      var response = yield fetch(url);
-      var jsonData = yield response.json();
-      var updatedWordList = words.map(function (w) {
-        if (w.word === word) {
-          return {
-            word: w.word,
-            translation: jsonData.result
-          };
-        }
-        return _objectSpread({}, w);
-      });
-      var updatedAmount = checked + 1;
-      setChecked(updatedAmount);
-      window.localStorage.setItem('wordsAmount', updatedAmount.toString());
-      setWords(updatedWordList);
+      if (word.length > 0) {
+        var url = "".concat(URL, "/translate/").concat(word);
+        var response = yield fetch(url);
+        var jsonData = yield response.json();
+        var updatedWordList = words.map(function (w) {
+          if (w.word === word) {
+            return {
+              word: w.word,
+              translation: jsonData.result
+            };
+          }
+          return _objectSpread({}, w);
+        });
+        var updatedAmount = checked + 1;
+        setChecked(updatedAmount);
+        window.localStorage.setItem('wordsAmount', updatedAmount.toString());
+        setWords(updatedWordList);
+      }
     });
     return function checkTranslation(_x2) {
       return _ref2.apply(this, arguments);
