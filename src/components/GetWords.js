@@ -41,6 +41,9 @@ const GetWords = () => {
     setWords(updatedWordList);
   };
 
+  const iconClass =
+    words.length > 0 ? 'ion-ios-refresh-outline' : 'ion-android-arrow-forward';
+
   return (
     <div className="container">
       <div className="webflow-style-input">
@@ -53,19 +56,22 @@ const GetWords = () => {
           onChange={handleAmountInput}
         />
         <button onClick={handleButtonClick}>
-          <i className="icon ion-android-arrow-forward" />
+          <i className={`icon ${iconClass}`} />
         </button>
       </div>
       <div className="words-list">
         {words.map((word) => (
           <div className="word-row" key={word.word}>
-            {word.word} {word.translation}
-            <button
-              className="word-check-button"
-              onClick={() => checkTranslation(word.word)}
-            >
-              <i className="icon ion-checkmark" />
-            </button>
+            <span>{word.word}</span>
+            <span>{word.translation}</span>
+            {word.translation.length === 0 && (
+              <button
+                className="word-check-button"
+                onClick={() => checkTranslation(word.word)}
+              >
+                <i className="icon ion-checkmark" />
+              </button>
+            )}
           </div>
         ))}
       </div>
