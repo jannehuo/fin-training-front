@@ -1,9 +1,21 @@
-import GetWords from './GetWords';
+import { useEffect } from 'preact/hooks'
 
-const App = () => (
-  <div id="app">
-    <GetWords />
-  </div>
-);
+import Words from './GetWords'
 
-export default App;
+const App = () => {
+  useEffect(() => {
+    const wordsAmount = window.localStorage.getItem('wordsAmount')
+
+    if (!wordsAmount) {
+      window.localStorage.setItem('wordsAmount', '0')
+    }
+  })
+
+  return (
+    <div id='app'>
+      <Words />
+    </div>
+  )
+}
+
+export default App

@@ -101,7 +101,7 @@ module.exports = require("preact");
 /* unused harmony export useCallback */
 /* unused harmony export useContext */
 /* unused harmony export useDebugValue */
-/* unused harmony export useEffect */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return p; });
 /* unused harmony export useErrorBoundary */
 /* unused harmony export useId */
 /* unused harmony export useImperativeHandle */
@@ -109,7 +109,7 @@ module.exports = require("preact");
 /* unused harmony export useMemo */
 /* unused harmony export useReducer */
 /* unused harmony export useRef */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return h; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return h; });
 /* harmony import */ var preact__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("HteQ");
 /* harmony import */ var preact__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(preact__WEBPACK_IMPORTED_MODULE_0__);
 
@@ -333,6 +333,7 @@ var app = __webpack_require__("ugae");
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(h) {/* harmony import */ var preact_hooks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("QRet");
+/* harmony import */ var _Stats__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("jnDp");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -348,16 +349,21 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+
 var URL = "https://fin-training-service.herokuapp.com";
-var GetWords = function GetWords() {
-  var _useState = Object(preact_hooks__WEBPACK_IMPORTED_MODULE_0__[/* useState */ "a"])(''),
+var Words = function Words() {
+  var _useState = Object(preact_hooks__WEBPACK_IMPORTED_MODULE_0__[/* useState */ "b"])(''),
     _useState2 = _slicedToArray(_useState, 2),
     amount = _useState2[0],
     setAmount = _useState2[1];
-  var _useState3 = Object(preact_hooks__WEBPACK_IMPORTED_MODULE_0__[/* useState */ "a"])([]),
+  var _useState3 = Object(preact_hooks__WEBPACK_IMPORTED_MODULE_0__[/* useState */ "b"])([]),
     _useState4 = _slicedToArray(_useState3, 2),
     words = _useState4[0],
     setWords = _useState4[1];
+  var _useState5 = Object(preact_hooks__WEBPACK_IMPORTED_MODULE_0__[/* useState */ "b"])(0),
+    _useState6 = _slicedToArray(_useState5, 2),
+    checked = _useState6[0],
+    setChecked = _useState6[1];
   var handleAmountInput = function handleAmountInput(e) {
     setAmount(e.target.value);
   };
@@ -392,12 +398,21 @@ var GetWords = function GetWords() {
         }
         return _objectSpread({}, w);
       });
+      var updatedAmount = checked + 1;
+      setChecked(updatedAmount);
+      window.localStorage.setItem('wordsAmount', updatedAmount.toString());
       setWords(updatedWordList);
     });
     return function checkTranslation(_x2) {
       return _ref2.apply(this, arguments);
     };
   }();
+  Object(preact_hooks__WEBPACK_IMPORTED_MODULE_0__[/* useEffect */ "a"])(function () {
+    var wordsAmount = localStorage.getItem('wordsAmount');
+    if (wordsAmount) {
+      setChecked(parseInt(wordsAmount, 10));
+    }
+  }, [setChecked]);
   var iconClass = words.length > 0 ? 'ion-ios-refresh-outline' : 'ion-android-arrow-forward';
   return h("div", {
     className: "container"
@@ -414,13 +429,15 @@ var GetWords = function GetWords() {
     onClick: handleButtonClick
   }, h("i", {
     className: "icon ".concat(iconClass)
-  }))), h("div", {
+  }))), h(_Stats__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"], {
+    amount: checked
+  }), h("div", {
     className: "words-list"
   }, words.map(function (word) {
     return h("div", {
       className: "word-row",
       key: word.word
-    }, h("span", null, word.word), h("span", null, word.translation), word.translation.length === 0 && h("button", {
+    }, h("span", null, word.word), word.translation.length > 0 && h("span", null, word.translation), word.translation.length === 0 && h("button", {
       className: "word-check-button",
       onClick: function onClick() {
         return checkTranslation(word.word);
@@ -430,7 +447,26 @@ var GetWords = function GetWords() {
     })));
   })));
 };
-/* harmony default export */ __webpack_exports__["a"] = (GetWords);
+/* harmony default export */ __webpack_exports__["a"] = (Words);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__("HteQ")["h"]))
+
+/***/ }),
+
+/***/ "jnDp":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(h) {var Stats = function Stats(props) {
+  return h("div", {
+    className: "stats-container"
+  }, h("span", {
+    className: "amount-row-header"
+  }, "Viewed"), h("span", {
+    key: props.amount,
+    className: "amount animate"
+  }, props.amount));
+};
+/* harmony default export */ __webpack_exports__["a"] = (Stats);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__("HteQ")["h"]))
 
 /***/ }),
@@ -439,12 +475,20 @@ var GetWords = function GetWords() {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(h) {/* harmony import */ var _GetWords__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("T/dg");
+/* WEBPACK VAR INJECTION */(function(h) {/* harmony import */ var preact_hooks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("QRet");
+/* harmony import */ var _GetWords__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("T/dg");
+
 
 var App = function App() {
+  Object(preact_hooks__WEBPACK_IMPORTED_MODULE_0__[/* useEffect */ "a"])(function () {
+    var wordsAmount = window.localStorage.getItem('wordsAmount');
+    if (!wordsAmount) {
+      window.localStorage.setItem('wordsAmount', '0');
+    }
+  });
   return h("div", {
     id: "app"
-  }, h(_GetWords__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"], null));
+  }, h(_GetWords__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"], null));
 };
 /* harmony default export */ __webpack_exports__["a"] = (App);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__("HteQ")["h"]))
