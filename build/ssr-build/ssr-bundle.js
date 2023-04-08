@@ -437,7 +437,9 @@ var Words = function Words() {
     return h("div", {
       className: "word-row",
       key: word.word
-    }, h("span", null, word.word), word.translation.length > 0 && h("span", null, word.translation), word.translation.length === 0 && h("button", {
+    }, h("span", null, word.word), word.translation.length > 0 && h("span", {
+      className: "word-translation"
+    }, word.translation), word.translation.length === 0 && h("button", {
       className: "word-check-button",
       onClick: function onClick() {
         return checkTranslation(word.word);

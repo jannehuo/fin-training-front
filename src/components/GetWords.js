@@ -78,7 +78,9 @@ const Words = () => {
         {words.map((word) => (
           <div className='word-row' key={word.word}>
             <span>{word.word}</span>
-            {word.translation.length > 0 && <span>{word.translation}</span>}
+            {word.translation.length > 0 && (
+              <span className='word-translation'>{word.translation}</span>
+            )}
             {word.translation.length === 0 && (
               <button
                 className='word-check-button'
