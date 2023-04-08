@@ -406,7 +406,7 @@ var GetWords = function GetWords() {
   }, h("input", {
     id: "amount",
     className: "",
-    type: "text",
+    type: "number",
     placeholder: "How Many words?",
     value: amount,
     onChange: handleAmountInput

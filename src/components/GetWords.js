@@ -50,7 +50,7 @@ const GetWords = () => {
         <input
           id="amount"
           className=""
-          type="text"
+          type="number"
           placeholder="How Many words?"
           value={amount}
           onChange={handleAmountInput}
