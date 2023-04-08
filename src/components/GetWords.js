@@ -1,5 +1,7 @@
 import { useState } from 'preact/hooks';
 
+const URL = process.env.API_URL;
+
 const GetWords = () => {
   const [amount, setAmount] = useState('');
   const [words, setWords] = useState([]);
@@ -9,7 +11,7 @@ const GetWords = () => {
   };
 
   const handleButtonClick = async () => {
-    const url = `http://localhost:8080/words/${amount}`;
+    const url = `${URL}/words/${amount}`;
     const response = await fetch(url);
     const jsonData = await response.json();
     const mappedData = jsonData.map((word) => {
@@ -22,7 +24,7 @@ const GetWords = () => {
   };
 
   const checkTranslation = async (word) => {
-    const url = `http://localhost:8080/translate/${word}`;
+    const url = `${URL}/translate/${word}`;
     const response = await fetch(url);
     const jsonData = await response.json();
     const updatedWordList = words.map((w) => {
