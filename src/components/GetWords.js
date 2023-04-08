@@ -42,24 +42,34 @@ const GetWords = () => {
   };
 
   return (
-    <>
-      <label htmlFor="amount">How Many words?</label>
-      <input
-        id="amount"
-        type="text"
-        value={amount}
-        onChange={handleAmountInput}
-      />
-      <button onClick={handleButtonClick}>Get Words!</button>
-      <div>
+    <div className="container">
+      <div className="webflow-style-input">
+        <input
+          id="amount"
+          className=""
+          type="text"
+          placeholder="How Many words?"
+          value={amount}
+          onChange={handleAmountInput}
+        />
+        <button onClick={handleButtonClick}>
+          <i className="icon ion-android-arrow-forward" />
+        </button>
+      </div>
+      <div className="words-list">
         {words.map((word) => (
-          <p key={word.word}>
+          <div className="word-row" key={word.word}>
             {word.word} {word.translation}
-            <button onClick={() => checkTranslation(word.word)}>Check!</button>
-          </p>
+            <button
+              className="word-check-button"
+              onClick={() => checkTranslation(word.word)}
+            >
+              <i className="icon ion-checkmark" />
+            </button>
+          </div>
         ))}
       </div>
-    </>
+    </div>
   );
 };
 
