@@ -332,7 +332,7 @@ var app = __webpack_require__("ugae");
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(h, Fragment) {/* harmony import */ var preact_hooks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("QRet");
+/* WEBPACK VAR INJECTION */(function(h) {/* harmony import */ var preact_hooks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("QRet");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -398,27 +398,39 @@ var GetWords = function GetWords() {
       return _ref2.apply(this, arguments);
     };
   }();
-  return h(Fragment, null, h("label", {
-    htmlFor: "amount"
-  }, "How Many words?"), h("input", {
+  return h("div", {
+    className: "container"
+  }, h("div", {
+    className: "webflow-style-input"
+  }, h("input", {
     id: "amount",
+    className: "",
     type: "text",
+    placeholder: "How Many words?",
     value: amount,
     onChange: handleAmountInput
   }), h("button", {
     onClick: handleButtonClick
-  }, "Get Words!"), h("div", null, words.map(function (word) {
-    return h("p", {
+  }, h("i", {
+    className: "icon ion-android-arrow-forward"
+  }))), h("div", {
+    className: "words-list"
+  }, words.map(function (word) {
+    return h("div", {
+      className: "word-row",
       key: word.word
     }, word.word, " ", word.translation, h("button", {
+      className: "word-check-button",
       onClick: function onClick() {
         return checkTranslation(word.word);
       }
-    }, "Check!"));
+    }, h("i", {
+      className: "icon ion-checkmark"
+    })));
   })));
 };
 /* harmony default export */ __webpack_exports__["a"] = (GetWords);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__("HteQ")["h"], __webpack_require__("HteQ")["Fragment"]))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__("HteQ")["h"]))
 
 /***/ }),
 
